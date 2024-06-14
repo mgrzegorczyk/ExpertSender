@@ -1,6 +1,6 @@
-﻿using ExpertSender.MVC.Commands;
-using ExpertSender.MVC.Models;
-using ExpertSender.MVC.Queries;
+﻿using ExpertSender.Application.Commands;
+using ExpertSender.Application.Models;
+using ExpertSender.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

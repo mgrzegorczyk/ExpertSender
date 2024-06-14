@@ -1,7 +1,7 @@
-﻿using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Commands;
+namespace ExpertSender.Application.Commands;
 
 public class UpdatePersonDetailsCommand : IRequest
 {
@@ -20,7 +20,7 @@ public class UpdatePersonDetailsCommandHandler : IRequestHandler<UpdatePersonDet
         _personRepository = personRepository;
     }
 
-    public async Task<Unit> Handle(UpdatePersonDetailsCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdatePersonDetailsCommand request, CancellationToken cancellationToken)
     {
         var person = await _personRepository.GetByIdAsync(request.Id);
 
@@ -34,7 +34,5 @@ public class UpdatePersonDetailsCommandHandler : IRequestHandler<UpdatePersonDet
         person.Description = request.Description;
 
         await _personRepository.UpdateAsync(person);
-
-        return Unit.Value;
     }
 }

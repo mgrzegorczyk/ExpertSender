@@ -1,9 +1,8 @@
-﻿using ExpertSender.MVC.Entities;
-using ExpertSender.MVC.Models;
-using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Domain.Entities;
+using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Commands;
+namespace ExpertSender.Application.Commands;
 
 public record CreateEmailCommand(string EmailAddress, int PersonId) : IRequest<int>;
 

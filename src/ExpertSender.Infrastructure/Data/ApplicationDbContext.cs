@@ -1,8 +1,7 @@
-﻿using ExpertSender.MVC.Entities;
-using ExpertSender.MVC.Models;
+﻿using ExpertSender.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpertSender.MVC.Data;
+namespace ExpertSender.Infrastructure.Data;
 
 public class ApplicationDbContext : DbContext
 {

@@ -1,9 +1,8 @@
-﻿using ExpertSender.MVC.Entities;
-using ExpertSender.MVC.Models;
-using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Domain.Entities;
+using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Commands;
+namespace ExpertSender.Application.Commands;
 
 public record UpdateEmailCommand(int Id, string EmailAddress) : IRequest;
 public class UpdateEmailCommandHandler : IRequestHandler<UpdateEmailCommand>
@@ -15,7 +14,7 @@ public class UpdateEmailCommandHandler : IRequestHandler<UpdateEmailCommand>
         _emailRepository = emailRepository;
     }
 
-    public async Task<Unit> Handle(UpdateEmailCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateEmailCommand request, CancellationToken cancellationToken)
     {
         var email = new Email
         {
@@ -24,7 +23,5 @@ public class UpdateEmailCommandHandler : IRequestHandler<UpdateEmailCommand>
         };
 
         await _emailRepository.UpdateAsync(email);
-
-        return Unit.Value;
     }
 }

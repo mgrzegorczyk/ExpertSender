@@ -1,10 +1,10 @@
-﻿namespace ExpertSender.MVC.Models;
+﻿namespace ExpertSender.Domain.Entities;
 
-public class PersonDetails
+public class Person
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Description { get; set; }
-    public List<EmailDetails> Emails { get; set; } = new List<EmailDetails>();
+    public ICollection<Email> Emails { get; set; }
 }

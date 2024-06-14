@@ -1,9 +1,8 @@
-﻿using ExpertSender.MVC.Entities;
-using ExpertSender.MVC.Models;
-using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Domain.Entities;
+using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Queries;
+namespace ExpertSender.Application.Queries;
 
 public record GetPersonByIdQuery(int Id) : IRequest<Person>;
 

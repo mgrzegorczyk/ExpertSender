@@ -1,9 +1,9 @@
-﻿using ExpertSender.MVC.Entities;
-using ExpertSender.MVC.Models;
-using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Application.Models;
+using ExpertSender.Domain.Entities;
+using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Commands;
+namespace ExpertSender.Application.Commands;
 
 public class UpdatePersonEmailsCommand : IRequest
 {
@@ -23,7 +23,7 @@ public class UpdatePersonEmailsCommandHandler : IRequestHandler<UpdatePersonEmai
         _mediator = mediator;
     }
 
-    public async Task<Unit> Handle(UpdatePersonEmailsCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdatePersonEmailsCommand request, CancellationToken cancellationToken)
     {
         var person = await _personRepository.GetByIdAsync(request.Id);
 
@@ -63,7 +63,5 @@ public class UpdatePersonEmailsCommandHandler : IRequestHandler<UpdatePersonEmai
         {
             await _mediator.Send(new DeleteEmailCommand(emailToRemove.Id));
         }
-        
-        return Unit.Value;
     }
 }

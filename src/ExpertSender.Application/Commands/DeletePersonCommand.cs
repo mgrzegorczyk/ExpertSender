@@ -1,7 +1,7 @@
-﻿using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Commands;
+namespace ExpertSender.Application.Commands;
 
 public class DeletePersonCommand : IRequest
 {
@@ -17,9 +17,8 @@ public class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand>
         _personRepository = personRepository;
     }
 
-    public async Task<Unit> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeletePersonCommand request, CancellationToken cancellationToken)
     {
         await _personRepository.DeleteAsync(request.Id);
-        return Unit.Value;
     }
 }

@@ -1,20 +1,12 @@
-using ExpertSender.MVC.Data;
-using ExpertSender.MVC.Repositories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+using ExpertSender.Application.Extensions;
+using ExpertSender.Infrastructure.Extensions;;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-
-builder.Services.AddMediatR(typeof(Program));
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-builder.Services.AddScoped<IEmailRepository, EmailRepository>();
+builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

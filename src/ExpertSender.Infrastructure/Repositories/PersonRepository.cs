@@ -1,9 +1,8 @@
-﻿using ExpertSender.MVC.Data;
-using ExpertSender.MVC.Entities;
-using ExpertSender.MVC.Models;
+﻿using ExpertSender.Domain.Entities;
+using ExpertSender.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpertSender.MVC.Repositories;
+namespace ExpertSender.Infrastructure.Repositories;
 
 public interface IPersonRepository
 {

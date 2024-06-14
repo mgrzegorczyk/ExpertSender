@@ -7,19 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="32.0.2" />
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+      <ProjectReference Include="..\ExpertSender.Application\ExpertSender.Application.csproj" />
+      <ProjectReference Include="..\ExpertSender.Infrastructure\ExpertSender.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+      <ProjectReference Include="..\ExpertSender.Application\ExpertSender.Application.csproj" />
+      <ProjectReference Include="..\ExpertSender.Infrastructure\ExpertSender.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

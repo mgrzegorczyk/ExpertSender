@@ -1,7 +1,7 @@
-﻿using ExpertSender.MVC.Repositories;
+﻿using ExpertSender.Infrastructure.Repositories;
 using MediatR;
 
-namespace ExpertSender.MVC.Commands;
+namespace ExpertSender.Application.Commands;
 
 public record DeleteEmailCommand(int Id) : IRequest;
 
@@ -14,9 +14,8 @@ public class DeleteEmailCommandHandler : IRequestHandler<DeleteEmailCommand>
         _emailRepository = emailRepository;
     }
 
-    public async Task<Unit> Handle(DeleteEmailCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteEmailCommand request, CancellationToken cancellationToken)
     {
         await _emailRepository.DeleteAsync(request.Id);
-        return Unit.Value;
     }
 }
