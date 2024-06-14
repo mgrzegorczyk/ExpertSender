@@ -15,9 +15,19 @@ namespace ExpertSender.MVC.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            var people = await _mediator.Send(new GetPeopleQuery());
+            int pageNumber = page ?? 1;
+            int pageSize = 10;
+
+            var query = new GetPeopleQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            var people = await _mediator.Send(query);
+
             return View(people);
         }
 
