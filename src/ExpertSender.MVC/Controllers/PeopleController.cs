@@ -79,8 +79,26 @@ namespace ExpertSender.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PersonDetails person)
         {
+            if (person.Emails == null || !person.Emails.Any())
+            {
+                ModelState.AddModelError("Emails", "Minimum one email is required!");
+            }
+            
             if (ModelState.IsValid)
             {
+                var newEmailAddresses = person.Emails.Where(x => x.Id == 0).Select(e => e.EmailAddress).ToList();
+                
+                var existingEmails = await _mediator.Send(new GetExistingEmailsByAddressesQuery(newEmailAddresses));
+                
+                if (existingEmails.Any())
+                {
+                    foreach (var existingEmail in existingEmails)
+                    {
+                        ModelState.AddModelError("Emails", $"Adres e-mail '{existingEmail}' już istnieje.");
+                    }
+                    return View(person);
+                }
+
                 var updatePersonCommand = new UpdatePersonDetailsCommand
                 {
                     Id = person.Id,
@@ -90,7 +108,7 @@ namespace ExpertSender.MVC.Controllers
                 };
 
                 await _mediator.Send(updatePersonCommand);
-                
+        
                 var personEmails = person.Emails
                     .Select(x => new EmailDetails() { Id = x.Id, EmailAddress = x.EmailAddress, PersonId = x.PersonId })
                     .ToList();
@@ -108,6 +126,7 @@ namespace ExpertSender.MVC.Controllers
 
             return View(person);
         }
+
 
         public async Task<IActionResult> Delete(int id)
         {
