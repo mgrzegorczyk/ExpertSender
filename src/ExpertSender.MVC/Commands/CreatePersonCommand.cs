@@ -9,7 +9,7 @@ public class CreatePersonCommand : IRequest<int>
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Description { get; set; }
-    public List<Email> Emails { get; set; }
+    public string EmailAddress { get; set; }
 }
 
 public class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, int>
@@ -28,8 +28,9 @@ public class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, i
             FirstName = request.FirstName,
             LastName = request.LastName,
             Description = request.Description,
-            Emails = request.Emails
         };
+
+        person.Emails = new List<Email>() { new Email() { EmailAddress = request.EmailAddress, Person = person } };
 
         await _personRepository.AddAsync(person);
 

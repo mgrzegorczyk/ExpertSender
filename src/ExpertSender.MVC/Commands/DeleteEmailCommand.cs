@@ -3,10 +3,7 @@ using MediatR;
 
 namespace ExpertSender.MVC.Commands;
 
-public class DeleteEmailCommand : IRequest
-{
-    public int Id { get; set; }
-}
+public record DeleteEmailCommand(int Id) : IRequest;
 
 public class DeleteEmailCommandHandler : IRequestHandler<DeleteEmailCommand>
 {

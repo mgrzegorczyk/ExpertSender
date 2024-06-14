@@ -1,0 +1,120 @@
+﻿@model ExpertSender.MVC.Models.PersonDetails
+
+@{
+    ViewData["Title"] = "Edit Person";
+}
+
+<h1>Edit Person</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <ul class="nav nav-tabs" id="personTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="person-details-tab" data-toggle="tab" href="#person-details" role="tab" aria-controls="person-details" aria-selected="true">Person Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="person-emails-tab" data-toggle="tab" href="#person-emails" role="tab" aria-controls="person-emails" aria-selected="false">Emails</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="personTabsContent">
+                <div class="tab-pane fade show active" id="person-details" role="tabpanel" aria-labelledby="person-details-tab">
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="person-emails" role="tabpanel" aria-labelledby="person-emails-tab">
+                    <div>
+                        <button type="button" class="btn btn-primary" onclick="addEmail()">Add Email</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Email Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="email-list">
+                                @for (int i = 0; i < Model.Emails.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="Emails[@i].Id" value="@Model.Emails[i].Id" />
+                                            <input name="Emails[@i].EmailAddress" class="form-control" value="@Model.Emails[i].EmailAddress" />
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger" onclick="removeEmail(this)">Remove</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function addEmail() {
+            var emailList = document.getElementById('email-list');
+            var newRow = emailList.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+
+            var newEmailIndex = emailList.rows.length - 1;
+            cell1.innerHTML = '<input type="hidden" name="Emails[' + newEmailIndex + '].Id" value="0" />' +
+                              '<input name="Emails[' + newEmailIndex + '].EmailAddress" class="form-control" />';
+            cell2.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeEmail(this)">Remove</button>';
+        }
+
+        function removeEmail(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+
+            var emailList = document.getElementById('email-list');
+            var rows = emailList.getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+                var inputs = rows[i].getElementsByTagName('input');
+                for (var j = 0; j < inputs.length; j++) {
+                    if (inputs[j].name.includes("EmailAddress")) {
+                        inputs[j].name = 'Emails[' + i + '].EmailAddress';
+                    }
+                    if (inputs[j].name.includes("Id")) {
+                        inputs[j].name = 'Emails[' + i + '].Id';
+                    }
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            $('#personTabs a').on('click', function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
+    </script>
+}

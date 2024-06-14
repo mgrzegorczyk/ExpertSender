@@ -4,12 +4,7 @@ using MediatR;
 
 namespace ExpertSender.MVC.Commands;
 
-public class UpdateEmailCommand : IRequest
-{
-    public int Id { get; set; }
-    public string EmailAddress { get; set; }
-}
-
+public record UpdateEmailCommand(int Id, string EmailAddress) : IRequest;
 public class UpdateEmailCommandHandler : IRequestHandler<UpdateEmailCommand>
 {
     private readonly IEmailRepository _emailRepository;
