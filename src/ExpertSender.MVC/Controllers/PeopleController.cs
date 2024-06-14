@@ -31,6 +31,12 @@ namespace ExpertSender.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (await _mediator.Send(new GetEmailByAddressQuery(person.EmailAddress)) != null)
+                {
+                    ModelState.AddModelError("EmailAddress", "E-mail already exist!");
+                    return View(person);
+                }
+                
                 var command = new CreatePersonCommand
                 {
                     FirstName = person.FirstName,

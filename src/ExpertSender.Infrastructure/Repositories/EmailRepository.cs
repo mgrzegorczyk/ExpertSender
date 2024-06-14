@@ -11,6 +11,7 @@ public interface IEmailRepository
     Task AddAsync(Email email);
     Task UpdateAsync(Email email);
     Task DeleteAsync(int id);
+    public IQueryable<Email> GetAllQuery();
 }
 
 public class EmailRepository : IEmailRepository
@@ -52,5 +53,10 @@ public class EmailRepository : IEmailRepository
             _context.Emails.Remove(email);
             await _context.SaveChangesAsync();
         }
+    }
+
+    public IQueryable<Email> GetAllQuery()
+    {
+        return _context.Emails;
     }
 }
