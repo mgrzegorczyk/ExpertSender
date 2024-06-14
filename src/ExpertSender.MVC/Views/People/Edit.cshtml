@@ -4,8 +4,7 @@
     ViewData["Title"] = "Edit Person";
 }
 
-<h1>Edit Person</h1>
-
+<h4>Person</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
@@ -13,7 +12,7 @@
             <input type="hidden" asp-for="Id" />
             <ul class="nav nav-tabs" id="personTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="person-details-tab" data-toggle="tab" href="#person-details" role="tab" aria-controls="person-details" aria-selected="true">Person Details</a>
+                    <a class="nav-link active" id="person-details-tab" data-toggle="tab" href="#person-details" role="tab" aria-controls="person-details" aria-selected="true">Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="person-emails-tab" data-toggle="tab" href="#person-emails" role="tab" aria-controls="person-emails" aria-selected="false">Emails</a>
@@ -39,27 +38,28 @@
                 </div>
                 <div class="tab-pane fade" id="person-emails" role="tabpanel" aria-labelledby="person-emails-tab">
                     <div>
-                        <button type="button" class="btn btn-primary" onclick="addEmail()">Add Email</button>
+                        <br/>
+                        <button type="button" class="btn btn-success float-end" onclick="addEmail()">Add Email</button>
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>Email Address</th>
-                                    <th>Action</th>
-                                </tr>
+                            <tr>
+                                <th>Email Address</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
                             <tbody id="email-list">
-                                @for (int i = 0; i < Model.Emails.Count; i++)
-                                {
-                                    <tr>
-                                        <td>
-                                            <input type="hidden" name="Emails[@i].Id" value="@Model.Emails[i].Id" />
-                                            <input name="Emails[@i].EmailAddress" class="form-control" value="@Model.Emails[i].EmailAddress" />
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" onclick="removeEmail(this)">Remove</button>
-                                        </td>
-                                    </tr>
-                                }
+                            @for (int i = 0; i < Model.Emails.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="Emails[@i].Id" value="@Model.Emails[i].Id"/>
+                                        <input name="Emails[@i].EmailAddress" class="form-control" value="@Model.Emails[i].EmailAddress"/>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" onclick="removeEmail(this)">Remove</button>
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>
