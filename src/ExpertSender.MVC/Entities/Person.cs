@@ -1,4 +1,4 @@
-﻿namespace ExpertSender.MVC.Models;
+﻿namespace ExpertSender.MVC.Entities;
 
 public class Person
 {

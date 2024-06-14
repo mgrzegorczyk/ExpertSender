@@ -1,4 +1,5 @@
 ﻿using ExpertSender.MVC.Data;
+using ExpertSender.MVC.Entities;
 using ExpertSender.MVC.Models;
 using Microsoft.EntityFrameworkCore;
 

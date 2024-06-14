@@ -1,4 +1,6 @@
-﻿namespace ExpertSender.MVC.Models;
+﻿using ExpertSender.MVC.Models;
+
+namespace ExpertSender.MVC.Entities;
 
 public class Email
 {

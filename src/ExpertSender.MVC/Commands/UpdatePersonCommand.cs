@@ -1,4 +1,5 @@
-﻿using ExpertSender.MVC.Models;
+﻿using ExpertSender.MVC.Entities;
+using ExpertSender.MVC.Models;
 using ExpertSender.MVC.Repositories;
 using MediatR;
 
