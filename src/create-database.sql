@@ -1,4 +1,13 @@
-﻿IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+﻿IF DB_ID(N'ExpSendDB') IS NULL
+BEGIN
+    CREATE DATABASE [ExpSendDB];
+END;
+GO
+
+USE [ExpSendDB];
+GO
+
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
 BEGIN
     CREATE TABLE [__EFMigrationsHistory] (
         [MigrationId] nvarchar(150) NOT NULL,
@@ -38,4 +47,3 @@ GO
 
 COMMIT;
 GO
-
